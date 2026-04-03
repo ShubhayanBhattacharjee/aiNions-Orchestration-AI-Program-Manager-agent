@@ -145,7 +145,7 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements-minimal.txt
 
 # 4. Set up environment (mock mode needs no API key)
-cp .env.example .env
+cp .env
 # In .env, ensure: LLM_PROVIDER=mock
 
 # 5. Run all test cases
@@ -161,16 +161,6 @@ python main.py --test 1
 # 1-3. Same as above, but install full requirements
 pip install -r requirements.txt
 
-# 4. Get a free Gemini API key:
-#    https://aistudio.google.com/app/apikey
-#    (No credit card required — 15 RPM, 1M tokens/day free)
-
-# 5. Configure .env
-cp .env.example .env
-# Edit .env:
-#   GEMINI_API_KEY=your_actual_key_here
-#   LLM_PROVIDER=gemini
-
 # 6. Run
 python main.py
 ```
@@ -179,16 +169,14 @@ python main.py
 
 ## Environment Setup & API Keys
 
-Copy `.env.example` to `.env` and configure:
-
 ```env
 # .env
 
 # Choose your provider:
-LLM_PROVIDER=gemini        # or: groq | openrouter | anthropic | openai | mock
+LLM_PROVIDER=groq      
 
 # Set the matching API key:
-GEMINI_API_KEY=your_key_here
+GROQ_API_KEY=your_key_here
 
 # Optional overrides:
 LLM_MODEL=                 # Leave blank for auto-selection
@@ -197,66 +185,18 @@ OUTPUT_DIR=outputs
 VERBOSE=false              # Print internal engine logs
 ```
 
-### Full `.env.example` Reference
-
-```env
-# =============================================================
-# NION ORCHESTRATION ENGINE - Environment Configuration
-# =============================================================
-
-# OPTION 1: Google Gemini (RECOMMENDED - generous free tier)
-# Get free API key at: https://aistudio.google.com/app/apikey
-GEMINI_API_KEY=your_gemini_api_key_here
-
-# OPTION 2: Groq (extremely fast, very generous free tier)
-# Get free API key at: https://console.groq.com/keys
-GROQ_API_KEY=your_groq_api_key_here
-
-# OPTION 3: OpenRouter (aggregator, has free models)
-# Get free API key at: https://openrouter.ai/keys
-OPENROUTER_API_KEY=your_openrouter_api_key_here
-
-# OPTION 4: Anthropic Claude
-# Get API key at: https://console.anthropic.com/
-ANTHROPIC_API_KEY=your_anthropic_api_key_here
-
-# OPTION 5: OpenAI
-OPENAI_API_KEY=your_openai_api_key_here
-
-# Active provider (gemini | groq | openrouter | anthropic | openai | mock)
-LLM_PROVIDER=gemini
-
-# Model override (leave blank for auto-selection per provider)
-LLM_MODEL=
-
-# Output settings
-SAVE_OUTPUTS=true
-OUTPUT_DIR=outputs
-VERBOSE=false
-```
-
----
 
 ## LLM Provider Options
 
 | Provider | Free Tier | Speed | Quality | Get Key |
 |----------|-----------|-------|---------|---------|
-| **Gemini** ⭐ | 15 RPM, 1M tokens/day | Fast | High | [aistudio.google.com](https://aistudio.google.com/app/apikey) |
 | **Groq** | 14,400 req/day, 30 RPM | Very Fast | High | [console.groq.com](https://console.groq.com/keys) |
-| **OpenRouter** | Free models available | Medium | Medium | [openrouter.ai](https://openrouter.ai/keys) |
-| **Anthropic** | Paid only | Fast | Very High | [console.anthropic.com](https://console.anthropic.com/) |
-| **OpenAI** | Paid only | Fast | Very High | [platform.openai.com](https://platform.openai.com/api-keys) |
-| **Mock** | No key needed | Instant | N/A (dummy) | — |
 
 ### Auto-selected Models per Provider
 
 | Provider | Default Model |
 |----------|--------------|
-| Gemini | `gemini-1.5-flash` |
 | Groq | `llama-3.1-8b-instant` |
-| OpenRouter | `mistralai/mistral-7b-instruct:free` |
-| Anthropic | `claude-3-haiku-20240307` |
-| OpenAI | `gpt-4o-mini` |
 
 Override any model via `LLM_MODEL=` in `.env`.
 
@@ -604,11 +544,7 @@ Use `--test N` to run a single test case instead of all 7.
 
 ```
 python-dotenv>=1.0.0      # .env loading (always required)
-google-generativeai>=0.7.0 # Gemini provider
 groq>=0.9.0               # Groq provider
-requests>=2.31.0          # OpenRouter provider
-anthropic>=0.34.0         # Anthropic provider
-openai>=1.40.0            # OpenAI provider
 ```
 
 Install only what you need:
@@ -629,5 +565,3 @@ pip install -r requirements.txt
 ---
 
 ## License
-
-MIT — free to use and modify.

@@ -1,10 +1,3 @@
-"""
-core/llm_provider.py
---------------------
-Unified LLM provider abstraction.
-Supports: Gemini (free), Groq (free), OpenRouter (free models),
-          Anthropic, OpenAI, and Mock (no API key needed).
-"""
 
 import os
 import json
@@ -47,10 +40,6 @@ def call_llm(prompt: str, system: str = "", max_tokens: int = 2048) -> str:
             print(f"  [LLM ERROR] {provider}: {e} — falling back to mock")
         return _call_mock(prompt)
 
-
-# ─────────────────────────────────────────────────────────────
-# GEMINI  (google-generativeai)
-# ─────────────────────────────────────────────────────────────
 def _call_gemini(prompt: str, system: str, max_tokens: int) -> str:
     import google.generativeai as genai
 
@@ -71,9 +60,6 @@ def _call_gemini(prompt: str, system: str, max_tokens: int) -> str:
     return response.text
 
 
-# ─────────────────────────────────────────────────────────────
-# GROQ  (groq)
-# ─────────────────────────────────────────────────────────────
 def _call_groq(prompt: str, system: str, max_tokens: int) -> str:
     from groq import Groq
 
@@ -94,9 +80,6 @@ def _call_groq(prompt: str, system: str, max_tokens: int) -> str:
     return response.choices[0].message.content
 
 
-# ─────────────────────────────────────────────────────────────
-# OPENROUTER  (requests)
-# ─────────────────────────────────────────────────────────────
 def _call_openrouter(prompt: str, system: str, max_tokens: int) -> str:
     import requests
 
@@ -124,9 +107,6 @@ def _call_openrouter(prompt: str, system: str, max_tokens: int) -> str:
     return resp.json()["choices"][0]["message"]["content"]
 
 
-# ─────────────────────────────────────────────────────────────
-# ANTHROPIC  (anthropic)
-# ─────────────────────────────────────────────────────────────
 def _call_anthropic(prompt: str, system: str, max_tokens: int) -> str:
     import anthropic
 
@@ -144,10 +124,6 @@ def _call_anthropic(prompt: str, system: str, max_tokens: int) -> str:
     message = client.messages.create(**kwargs)
     return message.content[0].text
 
-
-# ─────────────────────────────────────────────────────────────
-# OPENAI  (openai)
-# ─────────────────────────────────────────────────────────────
 def _call_openai(prompt: str, system: str, max_tokens: int) -> str:
     from openai import OpenAI
 
@@ -167,10 +143,6 @@ def _call_openai(prompt: str, system: str, max_tokens: int) -> str:
     )
     return resp.choices[0].message.content
 
-
-# ─────────────────────────────────────────────────────────────
-# MOCK  (no API key required — deterministic realistic outputs)
-# ─────────────────────────────────────────────────────────────
 def _call_mock(prompt: str) -> str:
     """
     Generates realistic-looking orchestration outputs without any API.
@@ -215,9 +187,7 @@ def _call_mock(prompt: str) -> str:
         return "Relevance: PASS | Accuracy: PASS | Tone: PASS | Gaps Acknowledged: PASS | Result: APPROVED"
     if "instruction_led_learning" in p or "learn.*instruction" in p:
         return "Instruction stored. SOP updated. Rule added to knowledge base."
-
     return "Task completed successfully."
-
 
 def _mock_l1_plan(prompt: str) -> str:
     p = prompt.lower()
@@ -233,7 +203,6 @@ def _mock_l1_plan(prompt: str) -> str:
             {"task_id": "TASK-004", "target": "L2:COMMUNICATION_COLLABORATION", "type": "l2",
              "purpose": "Deliver status response via appropriate channel", "depends_on": ["TASK-003"]},
         ])
-
     if "can we add" in p or "feasib" in p or "before the" in p:
         return json.dumps([
             {"task_id": "TASK-001", "target": "L2:TRACKING_EXECUTION", "type": "l2",

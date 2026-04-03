@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 from datetime import datetime
 
-# ── Load .env if present ─────────────────────────────────────
+#Load .env if present 
 try:
     from dotenv import load_dotenv
     load_dotenv()
