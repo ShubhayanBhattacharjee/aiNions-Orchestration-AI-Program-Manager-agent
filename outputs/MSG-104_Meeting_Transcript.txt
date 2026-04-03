@@ -1,0 +1,106 @@
+==============================================================================
+NION ORCHESTRATION MAP
+==============================================================================
+Message: MSG-104
+From:    System (Meeting Bot)
+Project: PRJ-ALPHA
+Source:  meeting
+
+==============================================================================
+L1 PLAN
+==============================================================================
+[TASK-001] → L2:COMMUNICATION_COLLABORATION
+  Purpose: Capture and process meeting transcript
+
+[TASK-002] → L2:TRACKING_EXECUTION
+  Purpose: Extract action items from meeting discussion
+  Depends On: TASK-001
+
+[TASK-003] → L2:TRACKING_EXECUTION
+  Purpose: Extract issues raised during meeting
+  Depends On: TASK-001
+
+[TASK-004] → L2:TRACKING_EXECUTION
+  Purpose: Extract risks mentioned in meeting
+  Depends On: TASK-001
+
+[TASK-005] → L2:COMMUNICATION_COLLABORATION
+  Purpose: Generate meeting minutes report
+  Depends On: TASK-002, TASK-003, TASK-004
+
+[TASK-006] → L3:evaluation (Cross-Cutting)
+  Purpose: Validate meeting minutes accuracy
+  Depends On: TASK-005
+
+[TASK-007] → L2:COMMUNICATION_COLLABORATION
+  Purpose: Distribute meeting minutes to attendees
+  Depends On: TASK-006
+
+==============================================================================
+L2/L3 EXECUTION
+==============================================================================
+
+[TASK-001] L2:COMMUNICATION_COLLABORATION
+  └─▶ [TASK-001-A] L3:meeting_attendance
+        Status: COMPLETED
+        Output:
+          • Meeting transcript captured:
+          • Duration: ~15 minutes
+          • Participants: Dev, QA, Designer, Tech Lead
+          • Key topics: API blocker, payment bugs, mobile mockups, auth refactor
+          • Minutes: GENERATED
+          • Action Items detected: 4
+          • Issues detected: 3
+          • Risks detected: 2
+
+[TASK-002] L2:TRACKING_EXECUTION
+  └─▶ [TASK-002-A] L3:action_item_extraction
+        Status: COMPLETED
+        Output:
+          • AI-001: "Assess SSO integration scope and complexity" Owner: ? | Due: ? | Flags: [MISSING_OWNER, MISSING_DUE_DATE]
+          • AI-002: "Review December release timeline capacity" Owner: Engineering Manager | Due: ASAP | Flags: [MISSING_DUE_DATE]
+
+[TASK-003] L2:TRACKING_EXECUTION
+  └─▶ [TASK-003-A] L3:issue_extraction
+        Status: COMPLETED
+        Output:
+          • ISSUE-001: "Dev blocked on API integration — staging environment down" Severity: CRITICAL | Owner: DevOps
+          • ISSUE-002: "3 critical bugs found in payment flow" Severity: CRITICAL | Owner: QA Team
+          • ISSUE-003: "Auth module technical debt requiring refactor" Severity: MEDIUM | Owner: Tech Lead
+
+[TASK-004] L2:TRACKING_EXECUTION
+  └─▶ [TASK-004-A] L3:risk_extraction
+        Status: COMPLETED
+        Output:
+          • RISK-001: "Staging environment down — blocks all QA testing" Likelihood: CONFIRMED | Impact: HIGH
+          • RISK-002: "Auth module refactor may introduce regressions" Likelihood: MEDIUM | Impact: HIGH
+
+[TASK-005] L2:COMMUNICATION_COLLABORATION
+  └─▶ [TASK-005-A] L3:meeting_attendance
+        Status: COMPLETED
+        Output:
+          • AI-001: "Assess SSO integration scope and complexity" Owner: ? | Due: ? | Flags: [MISSING_OWNER, MISSING_DUE_DATE]
+          • AI-002: "Review December release timeline capacity" Owner: Engineering Manager | Due: ASAP | Flags: [MISSING_DUE_DATE]
+
+[TASK-006] L3:evaluation (Cross-Cutting)
+  Status: COMPLETED
+  Output:
+    • Meeting transcript captured:
+    • Duration: ~15 minutes
+    • Participants: Dev, QA, Designer, Tech Lead
+    • Key topics: API blocker, payment bugs, mobile mockups, auth refactor
+    • Minutes: GENERATED
+    • Action Items detected: 4
+    • Issues detected: 3
+    • Risks detected: 2
+
+[TASK-007] L2:COMMUNICATION_COLLABORATION
+  └─▶ [TASK-007-A] L3:message_delivery
+        Status: COMPLETED
+        Output:
+          • Channel: email
+          • Recipient: Sender
+          • CC: Project stakeholders
+          • Delivery Status: SENT
+
+==============================================================================

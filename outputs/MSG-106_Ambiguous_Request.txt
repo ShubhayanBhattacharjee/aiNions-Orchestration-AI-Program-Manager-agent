@@ -1,0 +1,79 @@
+==============================================================================
+NION ORCHESTRATION MAP
+==============================================================================
+Message: MSG-106
+From:    Random User (Unknown)
+Project: N/A
+Source:  slack
+
+==============================================================================
+L1 PLAN
+==============================================================================
+[TASK-001] → L3:knowledge_retrieval (Cross-Cutting)
+  Purpose: Retrieve context to interpret ambiguous request
+
+[TASK-002] → L2:TRACKING_EXECUTION
+  Purpose: Extract any implied action items from vague request
+  Depends On: TASK-001
+
+[TASK-003] → L2:COMMUNICATION_COLLABORATION
+  Purpose: Formulate clarification request response
+  Depends On: TASK-001, TASK-002
+
+[TASK-004] → L3:evaluation (Cross-Cutting)
+  Purpose: Validate clarification response
+  Depends On: TASK-003
+
+[TASK-005] → L2:COMMUNICATION_COLLABORATION
+  Purpose: Deliver clarification request to sender
+  Depends On: TASK-004
+
+==============================================================================
+L2/L3 EXECUTION
+==============================================================================
+
+[TASK-001] L3:knowledge_retrieval (Cross-Cutting)
+  Status: COMPLETED
+  Output:
+    • Project: PRJ-ALPHA
+    • Current Release Date: Dec 15
+    • Days Remaining: 20
+    • Code Freeze: Dec 10
+    • Current Progress: 70%
+    • Team Capacity: 85% utilized
+    • Engineering Manager: Alex Kim
+    • Tech Lead: David Park
+
+[TASK-002] L2:TRACKING_EXECUTION
+  └─▶ [TASK-002-A] L3:action_item_extraction
+        Status: COMPLETED
+        Output:
+          • AI-001: "Clarify what 'speed things up' means — identify specific bottleneck" Owner: ? | Due: ? | Flags: [MISSING_OWNER, MISSING_DUE_DATE, AMBIGUOUS]
+
+[TASK-003] L2:COMMUNICATION_COLLABORATION
+  └─▶ [TASK-003-A] L3:qna
+        Status: COMPLETED
+        Output:
+          • AI-001: "Clarify what 'speed things up' means — identify specific bottleneck" Owner: ? | Due: ? | Flags: [MISSING_OWNER, MISSING_DUE_DATE, AMBIGUOUS]
+
+[TASK-004] L3:evaluation (Cross-Cutting)
+  Status: COMPLETED
+  Output:
+    • Response: "Request Clarification Needed:
+    • I received your message: 'We need to speed things up'
+    • Could you clarify:
+    • 1. Which project or workstream? (no project specified)
+    • 2. What specifically is slow? (development / deployment / decisions / communication)
+    • 3. What's the target timeline?
+    • I've logged this as an ambiguous action item and will update once clarified."
+
+[TASK-005] L2:COMMUNICATION_COLLABORATION
+  └─▶ [TASK-005-A] L3:message_delivery
+        Status: COMPLETED
+        Output:
+          • Channel: slack
+          • Recipient: Sender
+          • CC: Project stakeholders
+          • Delivery Status: SENT
+
+==============================================================================
