@@ -1,0 +1,75 @@
+==============================================================================
+NION ORCHESTRATION MAP
+==============================================================================
+Message: MSG-001
+From:    Sarah Chen (Product Manager)
+Project: PRJ-ALPHA
+Source:  email
+
+==============================================================================
+L1 PLAN
+==============================================================================
+[TASK-001] → L3:knowledge_retrieval (Cross-Cutting)
+  Purpose: Retrieve context to interpret ambiguous request
+
+[TASK-002] → L2:TRACKING_EXECUTION
+  Purpose: Extract any implied action items from vague request
+  Depends On: TASK-001
+
+[TASK-003] → L2:COMMUNICATION_COLLABORATION
+  Purpose: Formulate clarification request response
+  Depends On: TASK-001, TASK-002
+
+[TASK-004] → L3:evaluation (Cross-Cutting)
+  Purpose: Validate clarification response
+  Depends On: TASK-003
+
+[TASK-005] → L2:COMMUNICATION_COLLABORATION
+  Purpose: Deliver clarification request to sender
+  Depends On: TASK-004
+
+==============================================================================
+L2/L3 EXECUTION
+==============================================================================
+
+[TASK-001] L3:knowledge_retrieval (Cross-Cutting)
+  Status: COMPLETED
+  Output:
+    • Project: PRJ-ALPHA
+    • Current Release Date: Dec 15
+    • Days Remaining: 20
+    • Code Freeze: Dec 10
+    • Current Progress: 70%
+    • Team Capacity: 85% utilized
+    • Engineering Manager: Alex Kim
+    • Tech Lead: David Park
+
+[TASK-002] L2:TRACKING_EXECUTION
+  └─▶ [TASK-002-A] L3:action_item_extraction
+        Status: COMPLETED
+        Output:
+          • AI-001: "Evaluate real-time notifications feature" Owner: ? | Due: ? | Flags: [MISSING_OWNER, MISSING_DUE_DATE]
+          • AI-002: "Evaluate dashboard export feature" Owner: ? | Due: ? | Flags: [MISSING_OWNER, MISSING_DUE_DATE]
+
+[TASK-003] L2:COMMUNICATION_COLLABORATION
+  └─▶ [TASK-003-A] L3:qna
+        Status: COMPLETED
+        Output:
+          • AI-001: "Evaluate real-time notifications feature" Owner: ? | Due: ? | Flags: [MISSING_OWNER, MISSING_DUE_DATE]
+          • AI-002: "Evaluate dashboard export feature" Owner: ? | Due: ? | Flags: [MISSING_OWNER, MISSING_DUE_DATE]
+
+[TASK-004] L3:evaluation (Cross-Cutting)
+  Status: COMPLETED
+  Output:
+    • Response: "I've processed your request and logged relevant items. Please review the extracted action items and risks."
+
+[TASK-005] L2:COMMUNICATION_COLLABORATION
+  └─▶ [TASK-005-A] L3:message_delivery
+        Status: COMPLETED
+        Output:
+          • Channel: email
+          • Recipient: Sender
+          • CC: Project stakeholders
+          • Delivery Status: SENT
+
+==============================================================================
